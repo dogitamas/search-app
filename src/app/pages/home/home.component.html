@@ -1,0 +1,40 @@
+
+<div class="container mx-auto relative px-4 lg:px-0">
+  <br><br>
+
+  <div class="relative">
+    <input class="w-full py-3 px-2 rounded border-4" type="text" value="" placeholder="Type color, full product name or manufacurer" [(ngModel)]="searchField">
+    <button type="button" (click)="searchByKeyword(this.searchField)">
+    <svg class="absolute right-[12px] top-[17px]" fill="#000000" height="20px" width="20px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 488.4 488.4" xml:space="preserve">
+      <g id="SVGRepo_bgCarrier" stroke-width="0"/>
+      <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+      <g id="SVGRepo_iconCarrier"> <g> <g> <path d="M0,203.25c0,112.1,91.2,203.2,203.2,203.2c51.6,0,98.8-19.4,134.7-51.2l129.5,129.5c2.4,2.4,5.5,3.6,8.7,3.6 s6.3-1.2,8.7-3.6c4.8-4.8,4.8-12.5,0-17.3l-129.6-129.5c31.8-35.9,51.2-83,51.2-134.7c0-112.1-91.2-203.2-203.2-203.2 S0,91.15,0,203.25z M381.9,203.25c0,98.5-80.2,178.7-178.7,178.7s-178.7-80.2-178.7-178.7s80.2-178.7,178.7-178.7 S381.9,104.65,381.9,203.25z"/> </g> </g> </g>
+    </svg>
+    </button>
+  </div>
+
+  <br><br>
+  <div *ngIf="showResults" class="text-gray-600">
+    There is {{ products.length }} result for the requested keyword.
+  </div>
+
+  <div class="grid md:grid-cols-3 lg:grid-cols-4 grid-cols-2 gap-3">
+      <div class="border-2 border-gray-200 mt-5" *ngFor="let item of products">
+        <div class="p-4 align-middle text-center">
+          <div class="relative"><img class="m-auto left-0 right-0" src="/images/{{ item.ImageName }}" width="60%" /></div>
+          <div><b>{{item.Title ? item.Title : item.Name }}</b></div>
+          <div>{{item.Manufacturer ? item.Manufacturer : item.Maker}}</div>
+          <div>Color: {{item.BaseColor ? item.BaseColor : item.Color}}</div>
+          <div>Price: <i class="line-through text-red-600 font-extralight">{{item.Old_Price !== 0 ? item.Old_Price : ''}}</i>
+          <i class="text-green-700 font-bold">{{item.Price | currency: 'EUR'}}</i></div>
+
+          <div><button class="bg-blue-500 text-white px-6 py-2 mt-4" type="button" (click)="addToCart()">Add to cart</button></div>
+        </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+
